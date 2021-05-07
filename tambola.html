@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  	
+  	<title> Tambola </title>
+
+<style>
+body {
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 30px;
+	height:100%;
+	width: 100%;
+	background-color: midnightblue;
+}
+header, footer{
+    background-color: darkgray;
+    padding: 10px;
+	font-size: 40px;
+    text-align: center;
+}
+footer {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	padding: 15px;
+	font-size: 15px;
+	text-align: right;
+}
+hr {
+	display: block;
+	margin-top: -0.7em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 1px;
+}
+.border {
+	background-color: dodgerblue;
+}
+#table, td {
+    border: 2px solid black;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+#table {
+	margin-top: 25px;
+	width: 100%;
+	margin-left: 3px;
+}
+
+.no_border {
+	border-width: 0px;
+	text-align: center;
+}
+
+#cache {
+	margin: 0px;
+}
+
+.temp2 {
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+#number {
+	text-align: center;
+}
+
+#number_para {
+	font-size: 650%;
+	padding-top: 60px;
+	padding-left: 0px;
+	height: 250px;
+}
+.circle {
+	border-style: solid;
+	border-color: dodgerblue;
+	border-radius: 50%;
+	width: 250px;
+	height: 250px;
+	border-width: thick;
+}
+#random,#button2 {
+	margin-top: 8%;
+	font-size: 170%;
+	font-family: "Comic Sans MS";
+	display:inline-block;
+	padding: 8px 20px;
+	background: hotpink;
+	background-color: gray;
+	box-shadow: inset 0 1px 1px cyan;
+	border-color: deepskyblue;
+	border-width: thin;
+	border-radius: 5px;
+	color: blue;
+	text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+#button2 {
+	font-size: 140%;
+	padding: 4px 15px;
+        display:inline-block;
+}
+.content {
+	margin-top: 5%;
+	padding-bottom: 10px;
+}
+#gameover {
+	padding-top: 10%;
+	font-size: 200%;
+	padding-bottom:-10%;
+}
+@media (max-width:4500px) {
+	td {
+		padding: 0px;
+		padding-top: 3px;
+		width: 30px;
+		text-align: center;
+		font-weight: bold;
+		height: 30px;
+		font-size: 90%;
+	}
+	#button2 {
+		font-size: 140%;
+		margin-top: 3	0px;
+	}
+}
+@media (min-width:400px) and (max-width:650px) {
+	td {
+		padding-top: 4px;
+		width: 30px;
+		text-align: center;
+		font-weight: bold;
+		height: 40px;
+		font-size: 120%;
+	}
+	#button2 {
+		font-size: 140%;
+		margin-top: 40px;
+	}
+}
+@media (min-width:650px) and (max-width:1200px) {
+	td {
+		padding-top: 4px;
+		width: 30px;
+		text-align: center;
+		font-weight: bold;
+		height: 60px;
+		font-size: 170%;
+	}
+	#button2 {
+		font-size: 140%;
+		margin-top: 50px;
+	}
+	#random {
+		margin-top: 4%;
+	}
+}
+@media (min-width:1200px) {
+	td {
+		padding-top: 4px;
+		width: 30px;
+		text-align: center;
+		font-weight: bold;
+		height: 55px;
+		font-size: 170%;
+	}
+	#button2 {
+		margin-top: 22%;
+		font-size: 140%;
+	}
+	#random {
+		margin-top: 11%;
+	}
+}
+
+</style>
+</head>
+<body>
+
+    <header class="container-fluid"> Tambola Random Number Generator</header> <hr>
+
+    <div class="container-fluid" style="padding-bottom:15px">
+      <div class="row">
+        <aside class="col-lg-5 col-lg-push-7">
+          
+        	<div class = "container-fluid">
+        		<div class = "row">
+
+        			<aside class="col-sm-9">
+        				<center><div class = "content">
+			              <div class = "circle">
+			                <p id = "number_para"> 0 </p>
+			              </div>
+			              <button id = "random"> Generate number </button>
+			              <div id = "end" style="display: none">
+			                <p id = "gameover">GAME OVER :D</p>
+			              </div>
+			              <br>
+			              <button id = "button2"> Play again! </button>
+			            </div></center>
+        			</aside>
+
+        			<aside class="col-sm-3">
+        				<p class = "temp2">Previous Numbers</p>
+        				<table id = "cache">
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        					<tr>
+        						<td class="no_border">s</td>
+        					</tr>
+        				</table>
+        			</aside>
+
+        		</div>
+        	</div>
+
+           
+          
+        </aside>
+
+        <section class="col-lg-7 col-lg-pull-5">
+          <table id = "table">
+            <tr>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+            </tr>
+            <tr>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+            </tr>
+            <tr>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+            </tr>
+            <tr>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+            </tr>
+            <tr>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+              <td class = "border"></td>
+              <td></td>
+            </tr>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <footer class="container-fluid">  </footer>
+
+</body>
+<script>
+let para = document.getElementById('number_para');
+let random_number = document.getElementById('random');
+let table = document.getElementById("table");
+let game = document.getElementById("end");
+let play_again = document.getElementById("button2");
+let cache = document.getElementById("cache");
+
+var w = window.speechSynthesis;
+
+var array = new Array()
+var store_num = new Array()
+len_store = 0;
+len = 90;
+for(var i=1;i<=90;++i) {
+	array.push(i);
+}
+
+for(var i=0;i<9;++i) {
+	for(var j=0;j<10;j++) {
+		table.rows[i].cells[j].innerText = "";
+	}
+}
+for(var i=0;i<8;i++) {
+	cache.rows[i].cells[0].innerText = "";
+}
+var row_prev = -1;
+var column_prev = -1;
+var row,column;
+random_number.addEventListener('click',function() {
+	var ran_value = Math.floor(Math.random() * len);
+	len-=1;
+	var n = array[ran_value].toString();
+	store_num.push(array[ran_value]);
+	len_store+=1;
+	row = parseInt(array[ran_value] / 10);
+	column = parseInt(array[ran_value] % 10);
+	if(column == 0) {
+		column = 10;
+		row -= 1;
+	}
+
+	if(len_store < 9) {
+		var k=0;
+		for(var i=len_store-1;i>=0;--i) {
+			cache.rows[k].cells[0].innerText = store_num[i].toString();
+			k+=1;
+		}
+	}
+	else {
+		var k =0;
+		for(var i =len_store-1;i>= len_store - 8;--i) {
+			cache.rows[k].cells[0].innerText = store_num[i].toString();
+			k+=1;
+		}
+	}
+
+	table.rows[row].cells[column-1].innerText = n;
+	table.rows[row].cells[column-1].style.backgroundColor = "silver";
+	table.rows[row].cells[column-1].style.backgroundImage = "linear-gradient(45deg, gray 0%, cyan 100%)";
+	if(row_prev !== -1 && column_prev !== -1) {
+		table.rows[row_prev].cells[column_prev-1].style.background = null;
+	}
+	para.innerText = n;
+	row_prev = row;
+	column_prev = column;
+	array.splice(ran_value,1);
+	if(len == 0) {
+		random_number.style.display = 'none';
+		game.style.display = 'block';
+	}
+})
+
+play_again.addEventListener('click',function() {
+	if(confirm("Are you sure you want to reset the game?")) {
+		w.cancel();
+		random_number.style.display = 'block';
+		game.style.display = 'none';
+		para.innerText = ":D";
+		array = new Array()
+		len = 90;
+		for(var i=1;i<=90;++i) {
+			array.push(i);
+		}
+		store_num = new Array()
+		len_store = 0;
+
+		for(var i=0;i<9;++i) {
+			for(var j=0;j<10;j++) {
+				table.rows[i].cells[j].innerText = "";
+			}
+		}
+		for(var i=0;i<8;i++) {
+			cache.rows[i].cells[0].innerText = "";
+		}
+		table.rows[row].cells[column-1].style.background = null;
+		var row_prev = -1;
+		var column_prev = -1;
+	}
+})
+</script>
+</html>
